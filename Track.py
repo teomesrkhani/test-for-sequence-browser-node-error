@@ -865,6 +865,8 @@ class TrackLogic(ScriptedLoadableModuleLogic):
     if len(imageFiles) != 0:
       imagesSequenceNode = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLSequenceNode",
                                                               "Image Nodes Sequence")
+                                                              
+      print(f"\n\n\nImage sequences node: {imagesSequenceNode}\n\n\n")
 
       # Create a progress/loading bar to display the progress of the images loading process
       progressDialog = qt.QProgressDialog("Loading 2D Images Into 3D Slicer", "Cancel",
@@ -945,6 +947,8 @@ class TrackLogic(ScriptedLoadableModuleLogic):
     # NOTE: This represents a node within the MRML scene, not within the subject hierarchy
     transformsSequenceNode = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLSequenceNode",
                                                                 "Transform Nodes Sequence")
+                                                                
+    print(f"\n\n\nTransforms sequence node: {transformsSequenceNode}\n\n\n")
 
     # Create a progress/loading bar to display the progress of the node creation process
     progressDialog = qt.QProgressDialog("Creating Transform Nodes From Transformation Data", "Cancel",
