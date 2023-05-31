@@ -3,11 +3,8 @@ import os
 import re
 from time import time
 
-import ctk
-import qt
-import vtk
+import ctk, qt, vtk, slicer
 
-import slicer
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 #from slicer.parameterNodeWrapper import *
@@ -44,39 +41,39 @@ This file was originally developed by James McCafferty.
 #
 
 class CustomParameterNode(slicer.vtkMRMLScriptedModuleNode):
-    def __init__(self, nodeName='CustomParameterNode'):
-        super(CustomParameterNode, self).__init__()
-        if isinstance(nodeName, str):
-            self.SetName(nodeName)
-        else:
-            self.SetName("CustomParameterNode")
+  def __init__(self, nodeName='CustomParameterNode'):
+    super(CustomParameterNode, self).__init__()
+    if isinstance(nodeName, str):
+      self.SetName(nodeName)
+    else:
+      self.SetName("CustomParameterNode")
 
-        self.folder2DImages = ''
-        self.sequenceNode2DImages = None
-        self.path3DSegmentation = ''
-        self.node3DSegmentation = 0
-        self.node3DSegmentationLabelMap = 0
-        self.transformsFilePath = ''
-        self.sequenceNodeTransforms = None
-        self.sequenceBrowserNode = None
-        self.totalImages = 0
-        self.fps = 0.0
-        self.opacity = 0.0
-        self.overlayAsOutline = False
+    self.folder2DImages = ''
+    self.sequenceNode2DImages = None
+    self.path3DSegmentation = ''
+    self.node3DSegmentation = 0
+    self.node3DSegmentationLabelMap = 0
+    self.transformsFilePath = ''
+    self.sequenceNodeTransforms = None
+    self.sequenceBrowserNode = None
+    self.totalImages = 0
+    self.fps = 0.0
+    self.opacity = 0.0
+    self.overlayAsOutline = False
 
 
-def get_custom_parameter_node():
-    # Get the parameter node by name
-    parameterNode = slicer.util.getNode("CustomParameterNode")
+  def get_custom_parameter_node():
+      # Get the parameter node by name
+      parameterNode = slicer.util.getNode("CustomParameterNode")
 
-    # Check if the parameter node exists
-    if parameterNode is None:
+      # Check if the parameter node exists
+      if parameterNode is None:
         # Create a new parameter node if it doesn't exist
         parameterNode = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLScriptedModuleNode", "CustomParameterNode")
         parameterNode.SetModuleName("CustomParameterNode")
         parameterNode.SetName("CustomParameterNode")
 
-    return parameterNode
+      return parameterNode
 
 
 #
@@ -643,6 +640,7 @@ class TrackWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
           
           sequenceBrowserNode.SetName("Sequence Browser")
+
           
           print(f"Checkpoint {count}")
           count += 1
